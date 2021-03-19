@@ -1,0 +1,12 @@
+
+<div id='loginwindow'>
+
+    <form #auth onsubmit='javascript:void(0);'>
+        <input type="email" id='email' placeholder="email" formControlName="email" />
+        <input type="password" id='password' placeholder="password"/>
+    </form>
+    <button (click)="submit(auth.email.value, auth.password.value)">
+        login
+    </button>
+
+</div>

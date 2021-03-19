@@ -1,0 +1,22 @@
+#loginwindow {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+#loginwindow input {
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#loginwindow button {
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+#loginwindow form {
+    display: grid;
+}
