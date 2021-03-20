@@ -5,5 +5,6 @@ import { Codable } from "../_internal/Codable";
     username: string;
     email: string;
     id: string;
+    isOnline?: boolean
 
  }

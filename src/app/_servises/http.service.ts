@@ -58,15 +58,19 @@ export class HttpService {
 
     return new Promise( (resolve, reject) => {
 
-      this.http.get<T>(url, { 
+      let timeout = setTimeout( () => {
+        reject(new Error("timeout"));
+      }, 10000);
+
+      this.http.get<T>(url,{ 
         headers: this.jwtHeader(),
         observe: 'response'
         })
-        .pipe(
-        map( response => {
-          resolve(response.body)
-        }))
-        .subscribe()
+        .subscribe( 
+          res => resolve(res.body),
+          err => reject(err),
+          () => console.log('HTTP request completed.')
+        )
 
     })
 

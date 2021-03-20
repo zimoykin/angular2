@@ -7,6 +7,7 @@ import { ConnectComponent } from './connect/connect.component';
 import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SocketIoModule } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [

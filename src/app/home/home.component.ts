@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { SocketMessage } from '../_dto/SocketsDTO/SocketMessage';
 import { UserPublic } from '../_dto/UserPublic';
 import { HttpService } from '../_servises/http.service';
+import { IoService } from '../_servises/io.service';
 
 @Component({
   selector: "app-home",
@@ -10,9 +13,10 @@ import { HttpService } from '../_servises/http.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService, private io: IoService) {}
 
   users$: Subject<[UserPublic]> = new BehaviorSubject ( undefined )
+  online = new Array<string> ()
 
   ngOnInit() : void {
 
@@ -27,6 +31,20 @@ export class HomeComponent implements OnInit {
     .catch ( err => {
       console.log(err)
     })
+
+    this.io.usersOnline
+    .subscribe( 
+      result => {
+        this.online = result
+      },
+      err => console.log(err),
+      () => {console.log('ws done')}
+      )
     
+  }
+
+
+  isOnline (clientid: string) : boolean {
+    return (this.online.filter( val => { return val == clientid }).length != 0)
   }
 }
