@@ -1,18 +1,28 @@
 <div id='main'>
 
     <div id='users'>
-
-       <div *ngFor="let user of users$ | async">
-           <p> 
-               {{ user.username }} 
-               {{ isOnline(user.id )}} 
-            </p>
-       </div>
-
-    </div>
-
-    <div id='message'>
+        <div *ngFor="let user of users$ | async">
+            <img src='' />
+            <div id='username'>
+                <span>
+                    {{ (user.id == me.id) ? 'me' : user.username }}
+                </span>
+            </div>
+            <span *ngIf='isOnline(user.id)'>*</span>
+        </div>
 
     </div>
+
+    <div id='chats'>
+
+        <div id='messages'>
+
+        </div>
+        <div id='writemessage'>
+            <input type="text" />
+            <button type="button"> send </button>
+        </div>
+    </div>
+    
 
 </div>

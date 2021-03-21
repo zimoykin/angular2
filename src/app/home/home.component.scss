@@ -5,25 +5,62 @@
     transform: translate(50%, -20%);
     background-color: lightblue;
     height: 100%;
-    width: 70%;
+    width: 75%;
     display: flex;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
 }
 
 #users{
-    margin: auto 0;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
     background-color: lemonchiffon;
-    height: 100%;
+    height: 90%;
     width: 30%;
-    border-radius: 1rem;
+    border-radius: .5rem;
     box-shadow: 1rem 1rem 1rem rgba($color: black, $alpha: .5);
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+#username {
+    padding-bottom: 1rem;
+    display: inline-block;
 }
 
-#message{
-    margin: 3%;
+
+#chats{
+    width: 100%;
+    display: block;
+}
+
+#messages{
+    height: 85%;
+    width: 95%;
     background-color: white;
-    height: 92%;
-    width: 70%;
-    border-radius: 1rem;
     box-shadow: 1rem 1rem 1rem rgba($color: black, $alpha: .5);
+    margin: 1rem;
+    border-radius: 0.5rem;
+}
+
+#writemessage {
+    display: flex;
+    height: 5%;
+    margin: 1rem;
+}
+
+#chats input {
+
+    width: 95%;
+    border: none;
+    box-shadow: 1rem 1rem 1rem rgba($color: black, $alpha: .5);
+    border-radius: 0.5rem;
+    margin: 3px;
+
+}
+
+#writemessage button {   
+   background-color: aliceblue;
+   border: none;
+   margin: 3px;
+   box-shadow: 1rem 1rem 1rem rgba($color: black, $alpha: .5);
+   border-radius: 0.5rem;
 }
