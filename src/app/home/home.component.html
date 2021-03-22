@@ -4,9 +4,9 @@
         <div *ngFor="let user of users$ | async">
             <img src='' />
             <div id='username'>
-                <span>
+                <a (click)='selectedChat(user.id)'>
                     {{ (user.id == me.id) ? 'me' : user.username }}
-                </span>
+                </a>
             </div>
             <span *ngIf='isOnline(user.id)'>*</span>
         </div>
@@ -16,12 +16,17 @@
     <div id='chats'>
 
         <div id='messages'>
+            <div *ngFor="let message of messages$">
+                <app-chan-message [message]='message' ></app-chan-message>
+            </div>
+        </div>
 
-        </div>
-        <div id='writemessage'>
-            <input type="text" />
-            <button type="button"> send </button>
-        </div>
+        <form id='writemessage' #message onsubmit='javascript:void(0);'> 
+            <input type='text' id='written'/>
+            <button type='button' (click)="sendMessage(message.written.value)"> 
+                send
+            </button>
+        </form>
     </div>
     
 

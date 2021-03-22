@@ -8,13 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule } from 'ngx-socket-io';
+import { ChatMessageComponent } from './chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectComponent,
     HomeComponent,
-    AuthComponent
+    AuthComponent,
+    ChatMessageComponent
   ],
   imports: [
     BrowserModule,

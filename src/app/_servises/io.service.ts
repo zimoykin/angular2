@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
-import { observable, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { SocketMessage } from '../_dto/SocketsDTO/SocketMessage';
-import { MessageType } from '../Enums/MessageType';
-import { SocketID } from '../_dto/SocketsDTO/SocketID';
 import { UserAccess } from '../_dto/UserAccess';
 import { SocketUsersOnline } from '../_dto/SocketsDTO/SocketUserOnline';
+import { Chat } from '../_dto/SocketsDTO/ChatMessage';
 
 @Injectable({
   providedIn: "root",
@@ -14,26 +13,44 @@ import { SocketUsersOnline } from '../_dto/SocketsDTO/SocketUserOnline';
 export class IoService {
 
   private socket: SocketIOClient.Socket;
-  private idClient: Subject<string> = new Subject()
-
+  usr: UserAccess = JSON.parse(localStorage.getItem("usr"));
 
   constructor() {}
 
-  connect() : Observable<SocketUsersOnline> {
-
-    let usr: UserAccess = JSON.parse(localStorage.getItem( 'usr' ))
+  openSocket() {
 
     this.socket = io(environment.server, {
-      query: { token: usr.accessToken }
+      query: {token: this.usr.accessToken},
     });
-
-    return new Observable ( obser => {
-      this.socket.on( 'online', (data) => {
-        obser.next( data )
-      })
-    })
-
   }
 
+  connect(): Observable<SocketUsersOnline> {
 
+    if (!this.socket) this.openSocket()
+
+    return new Observable((obser) => {
+      this.socket.on( 'online', (data) => {
+        obser.next(data);
+      });
+    });
+  }
+
+  openChat(user: string, me: string): Observable<Chat> {
+
+    if (!this.socket) this.openSocket()
+
+    this.socket.emit( 'chat', {user1: user, user2: me, message: 'start'})
+
+    return new Observable((obser) => {
+      this.socket.on( 'chat', (data) => {
+        obser.next(data);
+      })
+    }) 
+  }
+
+  async send(topic: string, message: Chat) {
+      if (this.socket.open) {
+        this.socket.emit(topic, message) 
+      }
+  }
 }
