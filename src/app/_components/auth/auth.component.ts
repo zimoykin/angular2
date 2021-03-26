@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Auth } from '../_dto/Auth';
-import { UserAccess } from '../_dto/UserAccess';
-import { HttpService } from '../_servises/http.service';
+import { Auth } from '../../_dto/Auth';
+import { UserAccess } from '../../_dto/UserAccess';
+import { HttpService } from '../../_servises/http.service';
 
 @Component({
   selector: 'app-auth',
@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
 
     if (email != '' && password != '') {
       const auth: Auth = { email: email, password: password } 
-      this.http.post<Auth, UserAccess> ('/api/login', auth )
+      this.http.post<Auth, UserAccess> ( 'api/login', auth )
       .then( val => {  
         localStorage.setItem('usr', JSON.stringify(val))
         window.location.href = ''

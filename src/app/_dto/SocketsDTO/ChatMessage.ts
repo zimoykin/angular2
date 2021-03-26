@@ -1,13 +1,18 @@
 import { Codable } from "src/app/_internal/Codable";
+import { UserPublic } from "../UserPublic";
 
 export interface Chat {
-    user1:string,
-    user2:string,
-    message: Message
+    id: string
+    title: string
+    settings: any
+    admin: UserPublic
+    users: UserPublic[]
 }
 
 export interface Message {
-    user:string
-    date: Date
+    id: string
     message: string
+    chat: string
+    members: number
+    user: UserPublic
 }

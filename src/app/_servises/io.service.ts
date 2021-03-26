@@ -35,11 +35,11 @@ export class IoService {
     });
   }
 
-  openChat(user: string, me: string): Observable<Chat> {
+  openChat(user: string, myuser: string): Observable<Chat> {
 
     if (!this.socket) this.openSocket()
 
-    this.socket.emit( 'chat', {user1: user, user2: me, message: 'start'})
+    this.socket.emit( 'chat', {user1: user, user2: myuser, message: 'start'})
 
     return new Observable((obser) => {
       this.socket.on( 'chat', (data) => {

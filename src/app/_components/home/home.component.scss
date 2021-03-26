@@ -1,0 +1,19 @@
+#main{
+    position: absolute;
+    top: 20%;
+    right: 50%;
+    transform: translate(50%, -20%);
+    background-color: lightblue;
+    height: 100%;
+    width: 75%;
+    display: flex;
+    border-radius: 0.5rem;
+    
+}
+#chatlist{
+    min-width: 30%;
+}
+#chatmessage{
+    min-width: 70%;
+    
+}

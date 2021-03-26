@@ -1,0 +1,99 @@
+
+#toggle {
+    opacity: 0;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.btn>span,
+.btn>span::before,
+.btn>span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+}
+
+.btn>span::before {
+    content: '';
+    top: -8px;
+}
+
+.btn>span::after {
+    content: '';
+    top: 8px;
+}
+
+.humburger {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    text-align: center;
+    background-color: #ECEFF1;
+    box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+}
+
+.element {
+    display: block;
+    padding: 12px 24px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.element:hover {
+    background-color: #CFD8DC;
+}
+
+#toggle:checked~.btn>span {
+    transform: rotate(45deg);
+}
+
+#toggle:checked~.btn>span::before {
+    top: 0;
+    transform: rotate(0);
+}
+
+#toggle:checked~.btn>span::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+
+#toggle:checked~.humburger {
+    visibility: visible;
+    left: 0;
+}
+
+.btn>span,
+.btn>span::before,
+.btn>span::after {
+    transition-duration: .25s;
+}
+
+.humburger {
+    transition-duration: .25s;
+}
+
+.element {
+    transition-duration: .25s;
+}

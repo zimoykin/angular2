@@ -1,0 +1,11 @@
+<div id='card'>
+  <h3> {{ currentChat.title }} </h3>
+</div>
+
+<div *ngFor="let message of messages$|async">
+    <div id='card'>
+        <h5>{{ message.user.username }}</h5>
+        <h6> {{ message.message }} </h6>
+    </div>
+
+</div>

@@ -1,0 +1,16 @@
+<div id='chats'>
+
+    <div id='messages'>
+        <div *ngFor="let message of messages$">
+            <app-chan-message [message]='message' ></app-chan-message>
+        </div>
+    </div>
+
+    <form id='writemessage' #message onsubmit='javascript:void(0);'> 
+        <input type='text' id='written'/>
+        <button type='button' (click)='ngOnInit'> 
+            send
+        </button>
+    </form>
+</div>
+    

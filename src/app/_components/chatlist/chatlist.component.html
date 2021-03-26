@@ -1,0 +1,12 @@
+<div *ngFor="let chat of chats$ | async">
+    <div id='chats'>
+        <a (click)='selectChat(chat.id)'>
+            <div id='chat'>
+                <div id='ava'>
+                    <img src='../../../assets/avs/man.png' />
+                </div>
+                <span>{{ chat.title }}</span>
+            </div>
+        </a>
+    </div>
+</div>
