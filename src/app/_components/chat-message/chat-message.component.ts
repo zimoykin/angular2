@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { of, Subject } from "rxjs";
-import { Chat, Message } from "../../_dto/SocketsDTO/ChatMessage";
+import { UserPublic } from "src/app/_dto/UserPublic";
+import { Chat, Message, NewMessage } from "../../_dto/SocketsDTO/ChatMessage";
 import { HttpService } from "../../_servises/http.service";
 
 @Component({
@@ -15,6 +16,7 @@ export class ChatMessageComponent implements OnInit {
   messages$: Subject<Message[]> = new Subject<Message[]>()
 
   currentChat: Chat
+  @Input() me: string
 
   observer$ = {
     next: (value: string) => {
@@ -61,6 +63,19 @@ export class ChatMessageComponent implements OnInit {
       })
 
     })
+
+  }
+
+
+  sendMessage (message: string) {
+   
+    this.http.post<NewMessage, Message> ('api/message', {
+      chat: this.currentChat.id,
+      user: this.me,
+      message: message
+    })
+    .then ( () => this.getMessages(this.currentChat.id))
+    .catch ( err => console.log(err))
 
   }
 

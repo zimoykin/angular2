@@ -16,3 +16,9 @@ export interface Message {
     members: number
     user: UserPublic
 }
+
+export interface NewMessage {
+    message: string
+    chat: string
+    user: string
+}

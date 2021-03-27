@@ -16,6 +16,7 @@ import { IoService } from '../../_servises/io.service';
 export class HomeComponent implements OnInit {
 
   chaitid$: Subject<string> = new Subject<string>();
+  me: string
 
   constructor(private http: HttpService, private io: IoService) {}
 
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
 
     if (!localStorage.getItem("usr")) {
       window.location.href = "/auth";
+    } else {
+      let me: UserPublic = JSON.parse(localStorage.getItem("usr")).id
     }
     
   }
