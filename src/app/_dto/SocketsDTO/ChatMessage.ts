@@ -8,17 +8,22 @@ export interface Chat {
     admin: UserPublic
     users: UserPublic[]
 }
+export interface ChatPublic {
+    id: string
+    title: string
+    users: UserPublic[]
+}
 
 export interface Message {
     id: string
     message: string
-    chat: string
+    chat: ChatPublic
     members: number
     user: UserPublic
 }
 
 export interface NewMessage {
     message: string
-    chat: string
-    user: string
+    chatid: string
+    type: string
 }

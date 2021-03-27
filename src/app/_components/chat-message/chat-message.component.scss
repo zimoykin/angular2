@@ -1,6 +1,27 @@
-#mainchat {
-    height: 100%;
+#maintitle {
     position: relative;
+}
+
+#title {
+    background-color: lightblue;
+    border-radius: .5rem;
+    box-shadow: 1rem 1rem 1rem rgba($color: black, $alpha: .5);
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+    padding: 1rem;
+}
+
+#mainchat {
+    height: 80%;
+    position: relative;
+    overflow: scroll;
+}
+#mainMessage {
+    height: 11%;
+    position: relative;
+    overflow: scroll;
+    padding-top: 1rem;
 }
 
 #card {

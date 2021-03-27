@@ -15,17 +15,33 @@ import { IoService } from '../../_servises/io.service';
 })
 export class HomeComponent implements OnInit {
 
-  chaitid$: Subject<string> = new Subject<string>();
+  chaitid$ = new Subject<string>();
+  online = new Array<string> ()
   me: string
+  $messageEvent = new Subject<Message>();
 
   constructor(private http: HttpService, private io: IoService) {}
+
+  incomingMessage($event: Message) {
+    console.log($event)
+    this.$messageEvent.next($event)
+  }
 
   ngOnInit() : void {
 
     if (!localStorage.getItem("usr")) {
       window.location.href = "/auth";
     } else {
-      let me: UserPublic = JSON.parse(localStorage.getItem("usr")).id
+
+      this.io.connect()
+      .subscribe( 
+        result => {
+          this.online = result.users
+        },
+        err => console.log(err),
+        () => {console.log('ws done')}
+        )
+      this.me = JSON.parse(localStorage.getItem("usr")).id
     }
     
   }

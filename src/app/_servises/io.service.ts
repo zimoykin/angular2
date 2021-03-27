@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 import { Observable, Subject } from 'rxjs';
-import { SocketMessage } from '../_dto/SocketsDTO/SocketMessage';
+import { Message } from '../_dto/SocketsDTO/ChatMessage';
 import { UserAccess } from '../_dto/UserAccess';
 import { SocketUsersOnline } from '../_dto/SocketsDTO/SocketUserOnline';
 import { Chat } from '../_dto/SocketsDTO/ChatMessage';
@@ -24,33 +24,27 @@ export class IoService {
     });
   }
 
+  listenMessage(): Observable<Message> {
+
+    if (!this.socket) this.openSocket()
+
+    return new Observable(obser => {
+      this.socket.on( 'message', (data) => {
+        obser.next(data);
+      });
+    });
+
+  }
+
   connect(): Observable<SocketUsersOnline> {
 
     if (!this.socket) this.openSocket()
 
-    return new Observable((obser) => {
+    return new Observable(obser => {
       this.socket.on( 'online', (data) => {
         obser.next(data);
       });
     });
   }
 
-  openChat(user: string, myuser: string): Observable<Chat> {
-
-    if (!this.socket) this.openSocket()
-
-    this.socket.emit( 'chat', {user1: user, user2: myuser, message: 'start'})
-
-    return new Observable((obser) => {
-      this.socket.on( 'chat', (data) => {
-        obser.next(data);
-      })
-    }) 
-  }
-
-  async send(topic: string, message: Chat) {
-      if (this.socket.open) {
-        this.socket.emit(topic, message) 
-      }
-  }
 }

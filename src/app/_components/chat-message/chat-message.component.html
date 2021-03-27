@@ -1,20 +1,21 @@
-<div id='mainchat'>
-  <div id='card'>
+<div id='maintitle'>
+  <div id='title'>
     <h3> {{ currentChat.title }} </h3>
   </div>
+</div>
 
+<div id='mainchat'  #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <div *ngFor="let message of messages$|async">
     <div id='card'>
       <h5>{{ message.user.username }}</h5>
       <h6> {{ message.message }} </h6>
     </div>
-
   </div>
+</div>
 
-
+<div id='mainMessage'>
   <div id='chat'>
     <textarea #written type="text" placeholder="Write something here"> </textarea>
     <button id='sendMessage' type="submit" (click)='sendMessage(written.value)'> send </button>
   </div>
-
 </div>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { of, Subject } from "rxjs";
+import { BehaviorSubject, of, Subject } from "rxjs";
 import { UserPublic } from "src/app/_dto/UserPublic";
+import { IoService } from "src/app/_servises/io.service";
 import { Chat, Message, NewMessage } from "../../_dto/SocketsDTO/ChatMessage";
 import { HttpService } from "../../_servises/http.service";
 
@@ -10,10 +11,11 @@ import { HttpService } from "../../_servises/http.service";
   styleUrls: ["./chat-message.component.scss"],
 })
 export class ChatMessageComponent implements OnInit {
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService, private io: IoService) {}
 
   @Input() chaitid$: Subject<string>;
-  messages$: Subject<Message[]> = new Subject<Message[]>()
+  @Input() message$: Subject<Message>;
+  messages$ = new BehaviorSubject<Message[]>([])
 
   currentChat: Chat
   @Input() me: string
@@ -28,18 +30,28 @@ export class ChatMessageComponent implements OnInit {
     complete: () => console.log("completed"),
   };
 
+  incoming$ = {
+    next: (value: Message) => {
+      this.messages$.next(this.messages$.getValue().concat([value]))
+    },
+    error: (error) => console.error(error),
+    complete: () => console.log("completed"),
+  };
+
   ngOnInit(): void {
     this.chaitid$.subscribe(this.observer$);
+    this.message$.subscribe(this.incoming$);
+  }
+
+  scrollToBottom(): void { 
+    
   }
 
   getMessages(chatid: string) {
-
     if (!chatid) throw Error('check chat id respone')
-
     const params = new Map([
       ['chat', chatid]
     ]);
-
     this.http.get<Message[]>('api/message', params, true)
     .then( val => {
       this.messages$.next(val)
@@ -47,7 +59,6 @@ export class ChatMessageComponent implements OnInit {
     .catch( err => {
       console.log(err)
     })
-
   }
 
   getChat( chatid: string ):Promise<void> {
@@ -61,20 +72,18 @@ export class ChatMessageComponent implements OnInit {
         console.log(err)
         reject()
       })
-
     })
-
   }
 
 
   sendMessage (message: string) {
    
     this.http.post<NewMessage, Message> ('api/message', {
-      chat: this.currentChat.id,
-      user: this.me,
-      message: message
+      chatid: this.currentChat.id,
+      message: message,
+      type: 'chatMessage'
     })
-    .then ( () => this.getMessages(this.currentChat.id))
+    .then ( () => console.log('message sent'))
     .catch ( err => console.log(err))
 
   }

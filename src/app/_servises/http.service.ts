@@ -32,11 +32,15 @@ export class HttpService {
         reject(new Error("timeout"));
       }, 5000);
 
-      this.http.post<R>(url, body != null ? body : file)
+      this.http.post<R>(url, 
+        body != null ? body : file, 
+        {headers: this.jwtHeader(),
+        observe: 'response'}
+        )
         .pipe(
           map( (response) => {
             clearTimeout(timeout);
-            resolve(response);
+            resolve(response.body);
           }))
           .subscribe()
 
