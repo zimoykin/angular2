@@ -1,0 +1,25 @@
+
+<div id='window' *ngIf='visible|async'>
+    <div id='inputform'>
+        <button (click)='toogle(false)'> X </button>
+    </div>
+
+    <div id='selectUser'>
+     
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>User</mat-label>
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+          (optionSelected)='setSelected($event.option.value)'>
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.username}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      
+      <button mat-raised-button (click)='startChat()'>start chat</button>
+    </div>
+
+</div>

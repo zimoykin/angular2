@@ -76,8 +76,10 @@ export class ChatMessageComponent implements OnInit {
   }
 
   presentChat():string {
+    if (!this.currentChat) return
     return this.currentChat.users.map( val => { return val.username}).join( '/' )
   }
+  
   sendMessage(message: string) {
    this.http.post<NewMessage, Message> ('api/message', {
       chatid: this.currentChat.id,

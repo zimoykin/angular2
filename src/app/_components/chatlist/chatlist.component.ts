@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Chat, Message } from '../../_dto/SocketsDTO/ChatMessage';
 import { HttpService } from '../../_servises/http.service';
 import { IoService } from '../../_servises/io.service';
-
-
 
 @Component({
   selector: 'app-chatlist',
@@ -20,6 +18,7 @@ export class ChatlistComponent implements OnInit {
   @Output() message$ = new EventEmitter<Message>();
   chats$ = new BehaviorSubject<Chat[]> ([])
 
+  newchatvisible = new Subject<boolean>()
 
   constructor(
     private httpservice: HttpService,
@@ -28,7 +27,7 @@ export class ChatlistComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.httpservice.get<Chat[]>( 'api/chat')
+    this.httpservice.get<Chat[]>('api/chat')
     .then( uchats => {
       this.chats$.next(uchats)
       console.log(uchats)
@@ -74,5 +73,9 @@ export class ChatlistComponent implements OnInit {
       return filtred[0].title
     }
 
+  }
+
+  createnew() {
+    this.newchatvisible.next(true)
   }
 }

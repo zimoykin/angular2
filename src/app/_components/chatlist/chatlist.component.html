@@ -1,3 +1,10 @@
+<div id='chats'>
+    <a (click)='createnew()'>
+        <div id='chat'>
+            <span> open new chat </span>
+        </div>
+    </a>
+</div>
 <div *ngFor="let chat of chats$ | async">
     <div id='chats'>
         <a (click)='selectChat(chat.id)'>
@@ -10,3 +17,9 @@
         </a>
     </div>
 </div>
+
+<app-newchat
+    [visible]='newchatvisible'
+    [me]='me'
+>
+</app-newchat>

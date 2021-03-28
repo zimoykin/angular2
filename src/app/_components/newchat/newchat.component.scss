@@ -1,0 +1,49 @@
+#window {
+    background-color: rgba($color: black, $alpha: .6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+}
+
+#inputform {
+    position: absolute;
+    background-color: white;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    border-radius: .5rem;
+    box-shadow: 0.3rem 0.3rem 0.3rem rgba($color: black, $alpha: .3);
+    transition: 5s;
+}
+
+#inputform button {
+    padding: 1rem;
+    margin: 1rem;
+    border-width: 0;
+    position: absolute;
+    right: 0;
+    border-radius: .5rem;
+    box-shadow: 0.3rem 0.3rem 0.3rem rgba($color: black, $alpha: .3);
+}
+
+#selectUser {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+.example-form {
+    min-width: 250px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}

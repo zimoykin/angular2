@@ -1,3 +1,11 @@
+#avatar {
+    padding: 12px 24px;
+    cursor: pointer;
+    background-color: tomato;
+}
+#file {
+    display: none;
+}
 
 #toggle {
     opacity: 0;
@@ -95,5 +103,8 @@
 }
 
 .element {
+    transition-duration: .25s;
+}
+.avatar {
     transition-duration: .25s;
 }

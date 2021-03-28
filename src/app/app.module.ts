@@ -7,12 +7,30 @@ import { ConnectComponent } from './connect/connect.component';
 import { HomeComponent } from './_components/home/home.component';
 import { AuthComponent } from './_components/auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SocketIoModule } from 'ngx-socket-io';
 import { ChatMessageComponent } from './_components/chat-message/chat-message.component';
 import { ChatComponent } from './_components/chat/chat.component';
 import { ChatlistComponent } from './_components/chatlist/chatlist.component';
 import { NavbarComponent } from './_components/navbar/navbar.component';
 import { NotimplementedComponent } from './_components/notimplemented/notimplemented.component';
+import { NewchatComponent } from './_components/newchat/newchat.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
+const modules = [
+  BrowserModule,
+  AppRoutingModule,
+  HttpClientModule,
+  BrowserAnimationsModule,
+]
+
+const material = [
+  MatInputModule,
+  MatAutocompleteModule,
+  MatButtonModule
+];
+
 
 @NgModule({
   declarations: [
@@ -24,13 +42,10 @@ import { NotimplementedComponent } from './_components/notimplemented/notimpleme
     ChatComponent,
     ChatlistComponent,
     NavbarComponent,
-    NotimplementedComponent
+    NotimplementedComponent,
+    NewchatComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+  imports: [modules, material],
   providers: [],
   bootstrap: [AppComponent]
 })
