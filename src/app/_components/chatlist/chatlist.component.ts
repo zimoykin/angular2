@@ -16,8 +16,9 @@ import { IoService } from '../../_servises/io.service';
 export class ChatlistComponent implements OnInit {
 
   @Input() chaitid$: Subject<string>
+  @Input() me: string
   @Output() message$ = new EventEmitter<Message>();
-  chats$: Subject<Chat[]> = new BehaviorSubject<Chat[]> (undefined)
+  chats$ = new BehaviorSubject<Chat[]> ([])
 
 
   constructor(
@@ -59,4 +60,19 @@ export class ChatlistComponent implements OnInit {
     this.chaitid$.next(id)
   }
 
+  getChatTitle (id:string): string {
+
+   let filtred = this.chats$.getValue().filter( val => {
+      return val.id === id
+    })
+
+    if (filtred.length === 1 && filtred[0].users.length ===2) {
+        return filtred[0].users.filter( user => { 
+          return user.id !== this.me })[0].username
+        } 
+    else { 
+      return filtred[0].title
+    }
+
+  }
 }

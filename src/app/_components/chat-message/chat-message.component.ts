@@ -32,7 +32,11 @@ export class ChatMessageComponent implements OnInit {
 
   incoming$ = {
     next: (value: Message) => {
-      this.messages$.next(this.messages$.getValue().concat([value]))
+      if ( value.chat.id === this.currentChat.id) {
+        this.messages$.next(this.messages$.getValue().concat([value]))
+      } else {
+        alert(value.user.username + ": " + value.message)
+      }
     },
     error: (error) => console.error(error),
     complete: () => console.log("completed"),
@@ -41,10 +45,6 @@ export class ChatMessageComponent implements OnInit {
   ngOnInit(): void {
     this.chaitid$.subscribe(this.observer$);
     this.message$.subscribe(this.incoming$);
-  }
-
-  scrollToBottom(): void { 
-    
   }
 
   getMessages(chatid: string) {
@@ -61,7 +61,7 @@ export class ChatMessageComponent implements OnInit {
     })
   }
 
-  getChat( chatid: string ):Promise<void> {
+  getChat(chatid: string):Promise<void> {
     return new Promise( (resolve, reject) => {
       this.http.get<Chat>(`api/chat/${chatid}`)
       .then( chat => {
@@ -75,10 +75,11 @@ export class ChatMessageComponent implements OnInit {
     })
   }
 
-
-  sendMessage (message: string) {
-   
-    this.http.post<NewMessage, Message> ('api/message', {
+  presentChat():string {
+    return this.currentChat.users.map( val => { return val.username}).join( '/' )
+  }
+  sendMessage(message: string) {
+   this.http.post<NewMessage, Message> ('api/message', {
       chatid: this.currentChat.id,
       message: message,
       type: 'chatMessage'
