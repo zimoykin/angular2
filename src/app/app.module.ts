@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConnectComponent } from './connect/connect.component';
 import { HomeComponent } from './_components/home/home.component';
 import { AuthComponent } from './_components/auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,7 +34,6 @@ const material = [
 @NgModule({
   declarations: [
     AppComponent,
-    ConnectComponent,
     HomeComponent,
     AuthComponent,
     ChatMessageComponent,
@@ -49,4 +47,4 @@ const material = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

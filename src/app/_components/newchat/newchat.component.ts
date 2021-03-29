@@ -22,11 +22,6 @@ export class NewchatComponent implements OnInit {
   constructor(private http: HttpService) {}
 
   ngOnInit() {
-    this.http
-      .get<UserPublic[]>("api/user")
-      .then((users) => (this.options = users.filter( val => {return val.id !== this.me})))
-      .catch((err) => console.log(err));
-
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(""),
       map((value) => (typeof value === "string" ? value : value.name)),

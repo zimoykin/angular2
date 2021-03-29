@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserPublic } from './_dto/UserPublic';
+import { HttpService } from './_servises/http.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontnest';
+  title = '2clinic';
 }

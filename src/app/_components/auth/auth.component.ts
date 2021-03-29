@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
 
     if (email != '' && password != '') {
       const auth: Auth = { email: email, password: password } 
-      this.http.post<Auth, UserAccess> ( 'api/login', auth )
+      this.http.post<Auth, UserAccess> ('api/login', auth )
       .then( val => {  
         localStorage.setItem('usr', JSON.stringify(val))
         window.location.href = ''

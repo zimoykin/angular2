@@ -11,7 +11,7 @@
         id="file"
         (change)="handleFileInput($event.target.files)">
         <label for="file">
-          <img src='../../../assets/avs/man.png' />
+          <img src = {{avatar$|async}}/>
         </label>
       </div>
 

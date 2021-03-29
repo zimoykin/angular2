@@ -29,10 +29,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() : void {
 
-    if (!localStorage.getItem("usr")) {
-      window.location.href = "/auth";
-    } else {
-
       this.io.connect()
       .subscribe( 
         result => {
@@ -41,8 +37,9 @@ export class HomeComponent implements OnInit {
         err => console.log(err),
         () => {console.log('ws done')}
         )
+        
       this.me = JSON.parse(localStorage.getItem("usr")).id
-    }
+    
     
   }
 
